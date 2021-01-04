@@ -54,6 +54,30 @@ const _ = {
             }
         }
         return undefined;
+    },
+    drop: function (array, number) {
+        if (!number) {
+            number = 1;
+        }
+        return array.slice(number);
+    },
+    dropWhile: function (array, predicate) {
+        let dropIndex = array.findIndex((element, index) => {
+            return !predicate(element, index, array);
+        });
+        let droppedArray = this.drop(array, dropIndex);
+        return droppedArray;
+    },
+    chunk: function (array, size) {
+        if (!size) {
+            size = 1;
+        }
+        let chunkedArrays = [];
+        for (let i = 0; i < array.length; i += size) {
+            let chunk = array.slice(i, i + size);
+            chunkedArrays.push(chunk);
+        }
+        return chunkedArrays;
     }
 };
 
